@@ -1,9 +1,9 @@
-📌 API de Gerenciamento de Tarefas (Flask + JWT)
+# 📌 API de Gerenciamento de Tarefas (Flask + JWT)
 
 Esta é uma API REST desenvolvida com Flask para gerenciamento de tarefas, com autenticação de usuários usando JWT (JSON Web Token).
 O projeto permite que cada usuário possa se cadastrar, fazer login e gerenciar suas próprias tarefas (CRUD).
 
-🚀 Tecnologias utilizadas
+# 🚀 Tecnologias utilizadas
 
 Python
 
@@ -15,7 +15,8 @@ Flask-JWT-Extended
 
 SQLite (banco de dados local)
 
-📁 Estrutura do Projeto
+# 📁 Estrutura do Projeto
+<pre>
 api-gerenciamento-tarefas/
 │
 ├── app.py              # Arquivo principal do Flask
@@ -26,65 +27,75 @@ api-gerenciamento-tarefas/
 ├── README.md           # Este arquivo
 └── instance/
     └── tarefas.db      # Banco SQLite (criado automaticamente)
-
-⚙️ Como executar o projeto
-1. Clone o repositório:
+</pre>
+# ⚙️ Como executar o projeto
+## 1. Clone o repositório:
 git clone https://github.com/gutelo/api-gerenciamento-tarefas.git
+
 cd api-gerenciamento-tarefas
 
-2. Crie um ambiente virtual (opcional, mas recomendado):
+## 2. Crie um ambiente virtual (opcional, mas recomendado):
+
+```bash
 python -m venv venv
+```
 
-Ative o ambiente:
+### Ative o ambiente:
 
-# Linux/macOS:
+#### Linux/macOS:
+```bash
 source venv/bin/activate
-
-# Windows:
+```
+#### Windows:
+```bash
 venv\Scripts\activate
-
-3. Instale as dependências:
+```
+## 3. Instale as dependências:
+```bash
 pip install -r requirements.txt
-
-4. Execute a aplicação:
+```
+## 4. Execute a aplicação:
+```bash
 python app.py
+```
 
-🧪 Testando a API e Respostas Esperadas usando [Postman](https://www.postman.com/downloads/)
-1. Cadastro de usuário
+# 🧪 Testando a API e Respostas Esperadas usando [Postman](https://www.postman.com/downloads/)
+## 1. Register User
 
 Método: POST
 
 Endpoint: http://127.0.0.1:5000/register
 
-Body (JSON):
-
+#### Body (JSON):
+```bash
 {
   "username": "usuario1",
   "email": "usuario1@email.com",
   "password": "123456"
 }
+```
 
-Resposta (201):
-
+#### Resposta esperada (201):
+```bash 
 {
   "msg": "Usuário registrado com sucesso"
 }
-
-2. Login do usuário
+```
+## 2. Login User
 
 Método: POST
 
 Endpoint: http://127.0.0.1:5000/login
 
-Body (JSON):
-
+#### Body (JSON):
+```bash
 {
   "email": "usuario1@email.com",
   "password": "123456"
 }
-
-Resposta (200):
-
+```
+#### Resposta esperada (200):
+```bash
 {
   "access_token": "<jwt_token_aqui>",
   "user": {
@@ -93,32 +104,33 @@ Resposta (200):
     "email": "usuario1@email.com"
   }
 }
+```
+📌 Observação: pegue o token do /login e use no header de Create, List, Update e Delete.
 
-📌 Observação: pegue o token do /login e use no header de Create, Update e Delete.
-
-3. Create Task
+## 3. Create Task
 
 Método: POST
 
 Endpoint: http://127.0.0.1:5000/tasks
 
-Body (JSON):
-
+#### Body (JSON):
+```bash
 {
   "title": "Estudar Flask",
   "description": "Finalizar projeto com autenticação"
 }
+```
 
-Resposta esperada (201 Created)
-
+#### Resposta esperada (201 Created)
+```bash
 {
   "msg": "Tarefa criada com sucesso",
   "id": 1
 }
+```
+📌 Observação: anote o id retornado — você usará ele nos testes de update/delete.
 
-Obs: anote o id retornado — você usará ele nos testes de update/delete.
-
-4. List Task (requer token JWT)
+## 4. List Task
 
 Método: GET
 
@@ -128,8 +140,8 @@ Headers:
 
 Authorization: Bearer <seu_token>
 
-Resposta (200):
-
+#### Resposta (200):
+```bash
 [
   {
     "id": 1,
@@ -138,41 +150,41 @@ Resposta (200):
     "completed": false
   }
 ]
-
-5. Update Task
+```
+## 5. Update Task
 
 Método: PUT
 
 Endpoint: http://127.0.0.1:5000/tasks/<task_id>
 
-Body (JSON):
-
+#### Body (JSON):
+```bash
 {
   "title": "Estudar Flask atualizado",
   "description": "Atualizei a descrição",
   "completed": true
 }
-
-Resposta esperada (200 OK)
-
+```
+#### Resposta esperada (200 OK)
+```bash
 {
   "msg": "Tarefa atualizada com sucesso"
 }
-
-6. Deletar uma tarefa
+```
+## 6. Delete Task
 
 Método: DELETE
 
 Endpoint: http://127.0.0.1:5000/tasks/<task_id>
 
-Resposta esperada (200 OK)
-
+#### Resposta esperada (200 OK)
+```bash
 {
   "msg": "Tarefa deletada com sucesso"
 }
-
+```
 # Sequência de verificação rápida (fluxo completo)
-
+```bash
 POST /tasks → cria, retorna id = N.
 
 GET /tasks → verifique que a tarefa aparece na lista.
@@ -184,12 +196,12 @@ GET /tasks → verifique que as alterações apareceram.
 DELETE /tasks/N → deletar.
 
 GET /tasks → verifique que a tarefa sumiu da lista.
+```
 
-
-✅ Contribuição
+# ✅ Contribuição
 
 Sinta-se à vontade para clonar, modificar e testar o projeto. Sugestões são sempre bem-vindas! 🚀
 
-📄 Licença
+# 📄 Licença
 
 Este projeto está sob a licença MIT.
