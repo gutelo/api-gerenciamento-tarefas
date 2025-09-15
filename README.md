@@ -1,7 +1,10 @@
 📌 API de Gerenciamento de Tarefas (Flask + JWT)
-Esta é uma API REST desenvolvida com Flask para gerenciamento de tarefas, com autenticação de usuários usando JWT (JSON Web Token). O projeto permite que cada usuário se cadastre, faça login e gerencie suas próprias tarefas (CRUD).
+
+Esta é uma API REST desenvolvida com Flask para gerenciamento de tarefas, com autenticação de usuários usando JWT (JSON Web Token).
+O projeto permite que cada usuário possa se cadastrar, fazer login e gerenciar suas próprias tarefas (CRUD).
 
 🚀 Tecnologias utilizadas
+
 Python
 
 Flask
@@ -12,140 +15,181 @@ Flask-JWT-Extended
 
 SQLite (banco de dados local)
 
-
 📁 Estrutura do Projeto
-bash
-Copiar
-Editar
 api-gerenciamento-tarefas/
 │
-├── app.py                # Arquivo principal do Flask
-├── database.py           # Modelos e conexão com banco de dados
-├── auth_routes.py        # Rotas de autenticação
-├── task_routes.py        # Rotas das tarefas
-├── requirements.txt      # Dependências do projeto
-├── README.md             # Este arquivo
+├── app.py              # Arquivo principal do Flask
+├── database.py         # Modelos e conexão com banco de dados
+├── auth_routes.py      # Rotas de autenticação
+├── task_routes.py      # Rotas das tarefas
+├── requirements.txt    # Dependências do projeto
+├── README.md           # Este arquivo
 └── instance/
-    └── tarefas.db        # Banco SQLite (criado automaticamente)
-
+    └── tarefas.db      # Banco SQLite (criado automaticamente)
 
 ⚙️ Como executar o projeto
-
-Clone o repositório:
-bash
-Copiar
-Editar
-git clone https://github.com/seu-usuario/api-gerenciamento-tarefas.git
+1. Clone o repositório:
+git clone https://github.com/gutelo/api-gerenciamento-tarefas.git
 cd api-gerenciamento-tarefas
-Crie um ambiente virtual (opcional, mas recomendado):
 
-bash
-Copiar
-Editar
+2. Crie um ambiente virtual (opcional, mas recomendado):
 python -m venv venv
 
-# Linux/macOS
+Ative o ambiente:
+
+# Linux/macOS:
 source venv/bin/activate
 
-# Windows
+# Windows:
 venv\Scripts\activate
-Instale as dependências:
 
-bash
-Copiar
-Editar
+3. Instale as dependências:
 pip install -r requirements.txt
-Execute a aplicação:
 
-bash
-Copiar
-Editar
+4. Execute a aplicação:
 python app.py
 
-
-🧪 Como testar a API (usando Postman ou Insomnia)
-
+🧪 Testando a API e Respostas Esperadas (usando Postman ou Insomnia)
 1. Cadastro de usuário
+
 Método: POST
 
-Endpoint: /register
+Endpoint: http://127.0.0.1:5000/register
 
 Body (JSON):
 
-json
-Copiar
-Editar
 {
   "username": "usuario1",
+  "email": "usuario1@email.com",
   "password": "123456"
+}
+
+Resposta (201):
+
+{
+  "msg": "Usuário registrado com sucesso"
 }
 
 2. Login do usuário
+
 Método: POST
 
-Endpoint: /login
+Endpoint: http://127.0.0.1:5000/login
 
 Body (JSON):
 
-json
-Copiar
-Editar
 {
-  "username": "usuario1",
+  "email": "usuario1@email.com",
   "password": "123456"
 }
-Retorno: Um token JWT para autenticação.
 
-3. Listar tarefas (requer token JWT)
-Método: GET
+Resposta (200):
 
-Endpoint: /tasks
+{
+  "access_token": "<jwt_token_aqui>",
+  "user": {
+    "id": 1,
+    "username": "usuario1",
+    "email": "usuario1@email.com"
+  }
+}
 
-Headers:
+📌 Observação: pegue o token do /login e use no header de Create, Update e Delete.
 
-makefile
-Copiar
-Editar
-Authorization: Bearer <seu_token>
+3. Create Task
 
-4. Criar nova tarefa
 Método: POST
 
-Endpoint: /tasks
+Endpoint: http://127.0.0.1:5000/tasks
 
 Body (JSON):
 
-json
-Copiar
-Editar
 {
   "title": "Estudar Flask",
   "description": "Finalizar projeto com autenticação"
 }
 
-5. Atualizar uma tarefa
+Resposta esperada (201 Created)
+
+{
+  "msg": "Tarefa criada com sucesso",
+  "id": 1
+}
+
+Obs: anote o id retornado — você usará ele nos testes de update/delete.
+
+4. List Task (requer token JWT)
+
+Método: GET
+
+Endpoint: http://127.0.0.1:5000/tasks
+
+Headers:
+
+Authorization: Bearer <seu_token>
+
+Resposta (200):
+
+[
+  {
+    "id": 1,
+    "title": "Estudar Flask",
+    "description": "Finalizar projeto com autenticação",
+    "completed": false
+  }
+]
+
+5. Update Task
+
 Método: PUT
 
-Endpoint: /tasks/<task_id>
+Endpoint: http://127.0.0.1:5000/tasks/<task_id>
 
 Body (JSON):
 
-json
-Copiar
-Editar
 {
   "title": "Estudar Flask atualizado",
   "description": "Atualizei a descrição",
-  "done": true
+  "completed": true
+}
+
+Resposta esperada (200 OK)
+
+{
+  "msg": "Tarefa atualizada com sucesso"
 }
 
 6. Deletar uma tarefa
+
 Método: DELETE
 
-Endpoint: /tasks/<task_id>
+Endpoint: http://127.0.0.1:5000/tasks/<task_id>
+
+Resposta esperada (200 OK)
+
+{
+  "msg": "Tarefa deletada com sucesso"
+}
+
+# Sequência de verificação rápida (fluxo completo)
+
+POST /tasks → cria, retorna id = N.
+
+GET /tasks → verifique que a tarefa aparece na lista.
+
+PUT /tasks/N → atualizar campos.
+
+GET /tasks → verifique que as alterações apareceram.
+
+DELETE /tasks/N → deletar.
+
+GET /tasks → verifique que a tarefa sumiu da lista.
+
 
 ✅ Contribuição
-Sinta-se à vontade para clonar, modificar e testar o projeto. Sugestões são sempre bem-vindas!
+
+Sinta-se à vontade para clonar, modificar e testar o projeto. Sugestões são sempre bem-vindas! 🚀
 
 📄 Licença
+
 Este projeto está sob a licença MIT.
