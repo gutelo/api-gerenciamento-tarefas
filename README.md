@@ -35,7 +35,7 @@ Clone o repositório:
 bash
 Copiar
 Editar
-git clone https://github.com/seu-usuario/api-gerenciamento-tarefas.git
+git clone https://github.com/gutelo/api-gerenciamento-tarefas.git
 cd api-gerenciamento-tarefas
 Crie um ambiente virtual (opcional, mas recomendado):
 
