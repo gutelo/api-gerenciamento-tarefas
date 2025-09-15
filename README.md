@@ -30,9 +30,11 @@ api-gerenciamento-tarefas/
 </pre>
 # ⚙️ Como executar o projeto
 ## 1. Clone o repositório:
+```bash
 git clone https://github.com/gutelo/api-gerenciamento-tarefas.git
 
 cd api-gerenciamento-tarefas
+```
 
 ## 2. Crie um ambiente virtual (opcional, mas recomendado):
 
