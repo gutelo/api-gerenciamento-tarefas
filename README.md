@@ -49,7 +49,7 @@ pip install -r requirements.txt
 4. Execute a aplicação:
 python app.py
 
-🧪 Testando a API e Respostas Esperadas (usando Postman ou Insomnia)
+🧪 Testando a API e Respostas Esperadas usando [Postman](https://www.postman.com/downloads/)
 1. Cadastro de usuário
 
 Método: POST
