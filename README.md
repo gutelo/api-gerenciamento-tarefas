@@ -18,15 +18,18 @@ SQLite (banco de dados local)
 # 📁 Estrutura do Projeto
 <pre>
 api-gerenciamento-tarefas/
-│
-├── app.py              # Arquivo principal do Flask
-├── database.py         # Modelos e conexão com banco de dados
-├── auth_routes.py      # Rotas de autenticação
-├── task_routes.py      # Rotas das tarefas
-├── requirements.txt    # Dependências do projeto
-├── README.md           # Este arquivo
 └── instance/
-    └── tarefas.db      # Banco SQLite (criado automaticamente)
+    └── tarefas.db        # Banco SQLite (criado automaticamente)
+├── routes/
+│   ├── auth_routes.py    # Rotas de autenticação
+│   └── task_routes.py    # Rotas das tarefas
+├── .gitattributes        # Configurações de atributos de arquivos para o Git
+├── .gitignore            # Lista de arquivos e diretórios a serem ignorados pelo Git
+├── app.py                # Arquivo principal do Flask
+├── database.py           # Modelos e conexão com banco de dados
+├── extensions.py         # Inicialização e configuração de extensões Flask
+├── README.md             # Este arquivo
+└── requirements.txt      # Dependências do projeto
 </pre>
 # ⚙️ Como executar o projeto
 ## 1. Clone o repositório:
